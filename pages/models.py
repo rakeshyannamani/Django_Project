@@ -10,11 +10,13 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
+
 class Company(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
+
 
 class Language(models.Model):
     name = models.CharField(max_length=20)
@@ -22,10 +24,11 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+
 class Programmers(models.Model):
     name = models.CharField(max_length=20)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     languages = models.ManyToManyField(Language)
+
     def __str__(self):
         return self.name
-
