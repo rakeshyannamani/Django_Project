@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from . models import Page
+from django.http import JsonResponse
+from django.views.generic import View
+from . models import Page, Order
 
 
 def index(request, pagename):
@@ -15,7 +16,8 @@ def index(request, pagename):
     #assert False
     return render(request, 'pages/page.html', context)
 
-# def index(request):
-#     return HttpResponse("<h1>The MySite Homepage</h1>")
-#     return render(request, 'base.html')
-#     return render(request, 'pages/page.html')
+
+def getOrders(request):
+    queryset_orders = Order.objects.all()[:20]
+    queryset_cutomers = Order.objects.all()[:20]
+    return JsonResponse({'orders': list(queryset_orders.values()), 'customers': list(queryset_cutomers.values())})
