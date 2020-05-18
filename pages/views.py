@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from . models import Page
 
 
@@ -12,7 +12,7 @@ def index(request, pagename):
         'last_updated': pg.update_date,
         'page_list': Page.objects.all(),
     }
-    # assert False
+    #assert False
     return render(request, 'pages/page.html', context)
 
 # def index(request):

@@ -11,24 +11,27 @@ class Page(models.Model):
         return self.title
 
 
-class Company(models.Model):
-    name = models.CharField(max_length=20)
+class Customer(models.Model):
+    customer_name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return self.customer_name
 
 
-class Language(models.Model):
-    name = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name
-
-
-class Programmers(models.Model):
-    name = models.CharField(max_length=20)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    languages = models.ManyToManyField(Language)
+class Product(models.Model):
+    product_name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return self.product_name
+
+
+class Order(models.Model):
+    order_num = models.CharField(max_length=20)
+    order_date = models.DateTimeField('Order Received')
+    order_value = models.IntegerField(blank=True, null=True)
+    invoice_date = models.DateTimeField('Invoice Raised')
+    customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    product_name = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return self.order_num
