@@ -111,7 +111,7 @@
 <hr>
       <canvas class="my-4 w-100" id="myChart" width="900" height="280"></canvas>
 <hr>
-      <h2>Data from SQlite</h2>
+      <h4>Data from SQlite</h4>
 
       <div class="container mb-3 mt-3">
           <table class="table table-striped table-bordered mydatatable" style="width: 100%">
@@ -153,15 +153,16 @@
   </div>
 </div>
 
-<!-- Optional JavaScript -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="{% static 'js/dashboard.js' %}"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+<!-- Optional JavaScript -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="{% static 'js/chart.js' %}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/fc-3.3.1/kt-2.5.2/r-2.2.4/rg-1.1.2/rr-1.2.7/sp-1.1.0/sl-1.3.1/datatables.min.js"></script>
@@ -182,23 +183,19 @@
               url : "{% url 'getOrders' %}",
               dataType : 'json',
               success: function(data){
-                console.log(data);
                 $('#display').empty();
                 for (var i in data.orders)
                 {
-                    console.log(data.orders[i].id);
-                    console.log(data.customers[i].id);
-                    var temp="<tr><th scope='row'>"+data.orders[i].id+"</th><td>"+data.orders[i].order_date+"</td><td>"+data.orders[i].order_num+"</td><td>"+data.orders[i].order_value+"</td><td>"+data.orders[i].customer_name_id+"</td></tr>";
-                    $('#display').append(temp);
+                    var tabledata="<tr><th scope='row'>"+data.orders[i].id+"</th><td>"+data.orders[i].order_date+"</td><td>"+data.orders[i].order_num+"</td><td>"+data.orders[i].order_value+"</td><td>"+data.orders[i].customer_name_id+"</td></tr>";
+                    $('#display').append(tabledata);
                 }
               },
               error: function(data){
                 alert("No Data Found");
-              }
+              },
             });
           },1000);
       });
     </script>
-
 </body>
 </html>
